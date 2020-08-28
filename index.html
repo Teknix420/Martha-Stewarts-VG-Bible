@@ -9,22 +9,56 @@
 </head>
 
 <body>
-    <div class="input-field col s12">
-        <select>
-            <option value="" disabled selected>Choose your option</option>
-            <option value="1">Adventure</option>
-            <option value="2">Horror</option>
-            <option value="3">RPG</option>
-            <option value="4">Shooter</option>
-            <option value="5">Survival</option>
-            <option value="6">Racing</option>
-            <option value="7">Sports games</option>
-            <option value="8">Sandbox</option>
-            <option value="9">Strategy</option>
-            <option value="10">Multiplayer MMO</option>
-        </select>
-        <label>Game Genre</label>
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel white">
+                    <div class="card-content black-text">
+                        <span class="card-title">Seach Criteria</span>
+                        <div>
+
+                            <div class="row">
+                                <div class="input-field col s7">
+                                    <input placeholder="Enter A Game Name To Search By" id="gamename" type="text"
+                                        class="validate">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s7">
+                                    <select>
+                                        <option value="" disabled selected>Pick A Genre</option>
+                                        <option value="1">Adventure</option>
+                                        <option value="2">Horror</option>
+                                        <option value="3">RPG</option>
+                                        <option value="4">Shooter</option>
+                                        <option value="5">Survival</option>
+                                        <option value="6">Racing</option>
+                                        <option value="7">Sports games</option>
+                                        <option value="8">Sandbox</option>
+                                        <option value="9">Strategy</option>
+                                        <option value="10">Multiplayer MMO</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <form action="#" class="col s7">
+                                    <p class="range-field"> Average Completion Time in Hours:
+                                        <input type="range" id="test5" min="0" max="27" />
+                                    </p>
+                                </form>
+                            </div>
+                            <a id="submit" class="waves-effect waves-light btn-small pulse">Here We Go!!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
