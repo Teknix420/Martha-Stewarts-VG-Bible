@@ -22,3 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
   $(document).ready(function(){
     $('select').formSelect();
   });
+
+  $('#submit').click(function() {
+    
+      console.log($('.selected').text());
+  })
