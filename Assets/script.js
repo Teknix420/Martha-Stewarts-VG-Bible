@@ -61,6 +61,7 @@ $('#search').click(function() {
         for(var i = 0; i < response.data.length; i++) {
           console.log(response.data[i].name);
           console.log(response.data)
+          let horizontalRule = $('<hr>')
           let gameTitle = $('<h5>')
           gameTitle.text(response.data[i].name)
           let searchImg = $('<img>')
@@ -115,7 +116,7 @@ $('#search').click(function() {
           if (response.data[i].cover.url != undefined) {
           searchImg.attr('src', 'https://' + response.data[i].cover.url)
           }
-          imgDiv.append(gameTitle, searchImg, gameSummary,availableConsoles, ageRating)
+          imgDiv.append(gameTitle, searchImg, gameSummary,availableConsoles, ageRating, horizontalRule)
           $('#card-panel').append(imgDiv)
         }
         
