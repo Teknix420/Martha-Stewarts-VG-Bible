@@ -39,6 +39,8 @@ $('#submit').click(function() {
 $('#search').click(function() {
   var gameName = $('#gamename').val();
   let resultsAmount = $('#gamenumber').val()
+  $('#results-container').attr('class', '')
+  $('#main-container').attr('class', 'hide')
   axios({
     url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
     method: 'POST',
@@ -46,13 +48,69 @@ $('#search').click(function() {
         'Accept': 'application/json',
         'user-key': "8bf9fa37b1dfeca73818d322443b91fd",
     },
-    data: 'search "' + gameName + '"; fields name, release_dates.human, genres.name, cover.url, similar_games.name; limit 50;',
+    data: 'search "' + gameName + '"; fields name, release_dates.human, genres.name, cover.url, similar_games.name, time_to_beat.normally, summary, age_ratings.rating, platforms.name; limit 50;',
   })
     .then(response => {
         for(var i = 0; i < response.data.length; i++) {
           console.log(response.data[i].name);
+          console.log(response.data)
+          let gameTitle = $('<h5>')
+          gameTitle.text(response.data[i].name)
+          let searchImg = $('<img>')
+          let imgDiv = $('<div>')
+          let gameSummary = $('<p>')
+          let availableConsoles = $('<p>')
+          let consoleArray = []
+          let ageRating = $('<p>')
+          var ratingArray = [];
+          if (response.data[i].age_ratings != undefined) {
+            for(var k = 0; k < response.data[i].age_ratings.length; k++) {
+              var rating = '';
+              if (response.data[i].age_ratings[k].rating === 1) {
+                rating = 'Three';
+              } else if (response.data[i].age_ratings[k].rating === 2) {
+                rating = 'Seven';
+              } else if (response.data[i].age_ratings[k].rating === 3) {
+                rating = 'Twelve';
+              } else if (response.data[i].age_ratings[k].rating === 4) {
+                rating = 'Sixteen';
+              } else if (response.data[i].age_ratings[k].rating === 5) {
+                rating = 'Eighteen';
+              } else if (response.data[i].age_ratings[k].rating === 6) {
+                rating = 'RP';
+              } else if (response.data[i].age_ratings[k].rating === 7) {
+                rating = 'EC';
+              } else if (response.data[i].age_ratings[k].rating === 8) {
+                rating = 'E';
+              } else if (response.data[i].age_ratings[k].rating === 9) {
+                rating = 'E10';
+              } else if (response.data[i].age_ratings[k].rating === 10) {
+                rating = 'T';
+              } else if (response.data[i].age_ratings[k].rating === 11) {
+                rating = 'M';
+              } else if (response.data[i].age_ratings[k].rating === 12) {
+                rating = 'AO';
+              };
+              ratingArray.push(' ' + rating);
+            };
+          };
+          if (response.data[i].platforms != undefined) {
+            for (let j = 0; j < response.data[i].platforms.length; j++) {
+              console.log(response.data[i].platforms[j].name)
+              let name = response.data[i].platforms[j].name
+              consoleArray.push(' ' + name)
+            }
+          }
+          ageRating.text('ESRB/PEGI Rating: ' + ratingArray.toString())
+          availableConsoles.text('Available Consoles: ' + consoleArray.toString())
+          gameSummary.text(response.data[i].summary)
+          imgDiv.attr('class', 'row')
+          if (response.data[i].cover.url != undefined) {
+          searchImg.attr('src', 'https://' + response.data[i].cover.url)
+          }
+          imgDiv.append(gameTitle, searchImg, gameSummary,availableConsoles, ageRating)
+          $('#card-panel').append(imgDiv)
         }
-        console.log(response.data)
         
     })
     .catch(err => {
