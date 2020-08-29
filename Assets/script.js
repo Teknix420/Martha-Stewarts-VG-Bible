@@ -61,14 +61,18 @@ $('#search').click(function() {
         for(var i = 0; i < response.data.length; i++) {
           console.log(response.data[i].name);
           console.log(response.data)
-          let horizontalRule = $('<hr>')
+          let pageBreak = $('<br>')
+          let pageBreak2 = $('<br>')
+          let pageBreak3 = $('<br>')
+          let pageBreak4 = $('<br>')
           let gameTitle = $('<h5>')
           gameTitle.attr('class', 'header')
           let gameGenre = $('<p>')
           gameTitle.text(response.data[i].name)
           let searchImg = $('<img>')
           let imgDiv = $('<div>')
-          imgDiv.attr('class', 'card-image')
+          
+          imgDiv.attr('class', 'card-image title-img')
           let textDiv = $('<div>')
           textDiv.attr('class', 'card-stacked')
           let textContentDiv = $('<div>')
@@ -137,7 +141,7 @@ $('#search').click(function() {
             searchImg.attr('src', 'https://' + imgNew);
           }
           imgDiv.append(searchImg)
-          textContentDiv.append(gameTitle, gameGenre, gameSummary, availableConsoles, ageRating, similarGamesContent)
+          textContentDiv.append(gameTitle, gameGenre, pageBreak2, gameSummary, pageBreak3, availableConsoles, pageBreak4, ageRating, pageBreak, similarGamesContent)
           textDiv.append(textContentDiv)
           horizontalCardDiv.append(imgDiv, textDiv)
           $('#card-panel').append(horizontalCardDiv)
