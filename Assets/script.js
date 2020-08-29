@@ -85,7 +85,7 @@ $('#search').click(function() {
           if (response.data[i].similar_games != undefined) {
             for (let l = 0; l < response.data[i].similar_games.length; l++) {
               let similarGames = response.data[i].similar_games[l].name
-              similarGamesArray.push(similarGames)
+              similarGamesArray.push(' ' + similarGames)
             }
           }
           if (response.data[i].age_ratings != undefined) {
