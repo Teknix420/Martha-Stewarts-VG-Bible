@@ -63,6 +63,7 @@ $('#search').click(function() {
           console.log(response.data)
           let horizontalRule = $('<hr>')
           let gameTitle = $('<h5>')
+          let gameGenre = $('<p>')
           gameTitle.text(response.data[i].name)
           let searchImg = $('<img>')
           let imgDiv = $('<div>')
@@ -71,6 +72,14 @@ $('#search').click(function() {
           let consoleArray = []
           let ageRating = $('<p>')
           var ratingArray = [];
+          let similarGamesContent = $('<p>')
+          let similarGamesArray = []
+          if (response.data[i].similar_games != undefined) {
+            for (let l = 0; l < response.data[i].similar_games.length; l++) {
+              let similarGames = response.data[i].similar_games[l].name
+              similarGamesArray.push(similarGames)
+            }
+          }
           if (response.data[i].age_ratings != undefined) {
             for(var k = 0; k < response.data[i].age_ratings.length; k++) {
               var rating = '';
@@ -111,12 +120,16 @@ $('#search').click(function() {
           }
           ageRating.text('ESRB/PEGI Rating: ' + ratingArray.toString())
           availableConsoles.text('Available Consoles: ' + consoleArray.toString())
+          similarGamesContent.text('Similar Games: ' + similarGamesArray.toString() + ' ')
           gameSummary.text(response.data[i].summary)
-          imgDiv.attr('class', 'row')
-          if (response.data[i].cover.url != undefined) {
-          searchImg.attr('src', 'https://' + response.data[i].cover.url)
+          imgDiv.attr('class', 'row card-panel white')
+          if (response.data[i].cover != undefined) {
+            var imgCover = response.data[i].cover.url;
+            var imgReplace = 't_thumb';
+            var imgNew = imgCover.replace(imgReplace, 't_cover_big');
+            searchImg.attr('src', 'https://' + imgNew);
           }
-          imgDiv.append(gameTitle, searchImg, gameSummary,availableConsoles, ageRating, horizontalRule)
+          imgDiv.append(gameTitle, searchImg, gameGenre, gameSummary,availableConsoles, ageRating, similarGamesContent)
           $('#card-panel').append(imgDiv)
         }
         
