@@ -25,7 +25,10 @@ $(document).ready(function(){
 
 $('#submit').click(function() {
   
-    console.log($('.selected').text());
+    console.log($('#genre').val());
+    console.log($('#console').val());
+    console.log($('#perspective').val());
+    
 })
 
 
