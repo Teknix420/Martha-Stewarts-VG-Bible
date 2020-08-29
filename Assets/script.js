@@ -1,7 +1,7 @@
 // API Key: 8bf9fa37b1dfeca73818d322443b91fd
 // Request URL: https://api-v3.igdb.com\
 // const axios = require('axios');
- 
+
 // Make a request for a user with a given ID
 // axios.get('/user?ID=12345')
 // .then(function (response) {
@@ -12,46 +12,48 @@
 //   // handle error
 //   console.log(error);
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('select');
   var instances = M.FormSelect.init(elems, options);
 });
 
 // Or with jQuery
 
-$(document).ready(function(){
+$(document).ready(function () {
   $('select').formSelect();
 });
 
-$('#submit').click(function() {
-  
-    console.log($('#genre').val());
-    console.log($('#console').val());
-    console.log($('#perspective').val());
-    
+$('#submit').click(function () {
+
+  console.log($('#genre').val());
+  console.log($('#console').val());
+  console.log($('#perspective').val());
+  console.log($('#gamenumber').val() + " results");
+  console.log($('#gamehours').val() + " hours");
+
 })
 
 
-$('#search').click(function() {
+$('#search').click(function () {
   var gameName = $('#gamename').val();
 
   axios({
-    url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
-    method: 'POST',
-    headers: {
+      url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
+      method: 'POST',
+      headers: {
         'Accept': 'application/json',
         'user-key': "8bf9fa37b1dfeca73818d322443b91fd",
-    },
-    data: 'search "' + gameName + '"; fields name, release_dates; limit 50;',
-  })
+      },
+      data: 'search "' + gameName + '"; fields name, release_dates; limit 50;',
+    })
     .then(response => {
-        for(var i = 0; i < response.data.length; i++) {
-          console.log(response.data[i].name);
-        }
-        console.log(response.data)
+      for (var i = 0; i < response.data.length; i++) {
+        console.log(response.data[i].name);
+      }
+      console.log(response.data)
     })
     .catch(err => {
-        console.error(err);
+      console.error(err);
     });
 })
 // axios({
