@@ -25,13 +25,20 @@ $(document).ready(function(){
   $('select').formSelect();
 });
 
+$('#gamename').keypress(function(event) {
+  if (event.keyCode === 13) {
+    $('#search').click();
+  }
+});
+
+
 $('#submit').click(function() {
   
     console.log($('#genre').val());
     console.log($('#console').val());
     console.log($('#perspective').val());
-    console.log($('#gamenumber').val());
-    console.log($('#gamenumberresultsreturn').val());
+    console.log($('#gamenumber').val() + " games");
+    console.log($('#gamehours').val() + " hours");
     
 })
 
