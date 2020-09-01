@@ -15,3 +15,10 @@ body {
     margin-left: 1rem;
     margin-bottom: 2rem;
 }
+
+header {
+    font-family: 'XoloniumRegular';
+    font-weight: normal;
+    font-style: normal;
+    color: rgb(115, 203, 27);
+}
