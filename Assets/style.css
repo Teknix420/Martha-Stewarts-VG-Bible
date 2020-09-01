@@ -22,3 +22,11 @@ header {
     font-style: normal;
     color: rgb(115, 203, 27);
 }
+
+a:hover {
+    color: darkgray;
+}
+
+.hide {
+    display: none;
+}

@@ -33,7 +33,10 @@ $('#gamename').keypress(function (event) {
 
 
 $('#findagame').click(function () {
-
+  $('#search-results-header').text('Finding you a random game...')
+  $('#loading-bar').attr('class', '')
+  $('#results-container').attr('class', '')
+  $('#main-container').attr('class', 'hide')
   let genreArray = $('#genre').val();
   let genreSelection;
   genreSelection = genreArray.toString();
@@ -57,8 +60,8 @@ $('#findagame').click(function () {
     },
     data: 'where genres = (' + genreSelection + ') & platforms = (' + platformSelection + ') & player_perspectives = (' + perspectiveSelection + '); fields name, release_dates.human, genres.name, cover.url, similar_games.name, time_to_beat.normally, summary, age_ratings.rating, platforms.name; limit 500;',
   }).then(response => {
-    $('#results-container').attr('class', '')
-    $('#main-container').attr('class', 'hide')
+    $('#search-results-header').text('Random Games')
+    $('#loading-bar').attr('class', 'hide')
     for (let i = 0; i < resultSelection; i++) {
       let randomPick = response.data[Math.floor(Math.random() * response.data.length)];
       let pageBreak = $('<br>')
@@ -150,7 +153,9 @@ $('#findagame').click(function () {
 
 
 $('#search').click(function () {
+  $('#search-results-header').text('Searching for your game...')
   let gameName = $('#gamename').val();
+  $('#loading-bar').attr('class', '')
   $('#results-container').attr('class', '')
   $('#main-container').attr('class', 'hide')
   axios({
@@ -163,6 +168,8 @@ $('#search').click(function () {
     data: 'search "' + gameName + '"; fields name, release_dates.human, genres.name, cover.url, similar_games.name, time_to_beat.normally, summary, age_ratings.rating, platforms.name; limit 50;',
   })
     .then(response => {
+      $('#search-results-header').text('Searched Game')
+      $('#loading-bar').attr('class', 'hide')
       for (var i = 0; i < response.data.length; i++) {
         console.log(response.data[i].name);
         console.log(response.data)
