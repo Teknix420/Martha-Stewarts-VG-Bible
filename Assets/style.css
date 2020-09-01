@@ -1,6 +1,8 @@
-body {
+html, body {
     background-image: linear-gradient(to bottom right, red, yellow);
     opacity: .95;
+    height: 100%;
+    margin: 0;
 }
 
 #search {
