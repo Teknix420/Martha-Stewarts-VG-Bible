@@ -34,7 +34,7 @@ $('#gamename').keypress(function (event) {
 
 $('#findagame').click(function () {
   $('#search-results-header').text('Finding you a random game...')
-  $('#loading-bar').attr('class', '')
+  $('#loading-bar').attr('class', 'progress')
   $('#results-container').attr('class', '')
   $('#main-container').attr('class', 'hide')
   let genreArray = $('#genre').val();
@@ -155,7 +155,7 @@ $('#findagame').click(function () {
 $('#search').click(function () {
   $('#search-results-header').text('Searching for your game...')
   let gameName = $('#gamename').val();
-  $('#loading-bar').attr('class', '')
+  $('#loading-bar').attr('class', 'progress')
   $('#results-container').attr('class', '')
   $('#main-container').attr('class', 'hide')
   axios({
