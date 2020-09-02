@@ -46,7 +46,7 @@ a:hover {
 }
 
 .dropdown-content li span {
-    color: red;
+    animation: rainbow-text 5s infinite;
 }
 
 
