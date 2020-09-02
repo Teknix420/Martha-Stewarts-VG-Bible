@@ -75,7 +75,7 @@ $('#findagame').click(function () {
 
       } else if (resultSelection < response.data.length) {
 
-        $('#search-results-header').text('Random Games');
+        $('#search-results-header').text('You might like...');
         $('#loading-bar').attr('class', 'hide');
 
         for (let i = 0; i < resultSelection; i++) {
