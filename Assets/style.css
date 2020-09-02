@@ -34,3 +34,13 @@ a:hover {
 .hide {
     display: none;
 }
+
+.progress {
+    background-color: yellow;
+}
+
+#search-results-header {
+    font-family: 'XoloniumRegular';
+    text-shadow: 1px 1px black;
+    color:  rgb(115, 203, 27)
+}
