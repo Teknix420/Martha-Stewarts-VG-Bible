@@ -61,7 +61,7 @@ $('#findagame').click(function () {
 
     data: 'where genres = [' + genreSelection + '] & platforms = (' + platformSelection + ') & player_perspectives = (' + perspectiveSelection + '); fields name, release_dates.human, genres.name, cover.url, similar_games.name, time_to_beat.normally, summary, age_ratings.rating, platforms.name; limit 500;',
 
-    }).then(responsegit  => {
+    }).then(response  => {
 
     if (response.data.length === 0) {
 
