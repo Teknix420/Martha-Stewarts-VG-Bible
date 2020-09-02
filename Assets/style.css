@@ -44,3 +44,7 @@ a:hover {
     text-shadow: 1px 1px black;
     color:  rgb(115, 203, 27)
 }
+
+.dropdown-content li span {
+    color: red;
+}
