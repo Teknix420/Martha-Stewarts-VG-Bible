@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <header><h1 style="text-align: center; font-size: 50px;"><a href="./index.html" style="color: rgb(115, 203, 27);;">MARTHA STEWARTS VIDEOGAME BIBLE</a></h1></header>
+    <header><h1 style="text-align: center; font-size: 50px;"><a href="./index.html" style="color: rgb(115, 203, 27);;">MARTHA STEWART'S VIDEOGAME BIBLE</a></h1></header>
 
     <div class="container" id="main-container">
 
@@ -25,17 +25,18 @@
 
                             <div class="row">
                                 <div class="input-field col s7">
-                                    <input placeholder="Enter A Game Name To Search By" id="gamename" type="text"
+                                    <input placeholder="Enter A Game Name" id="gamename" type="text"
                                         class="validate">
                                 </div>
                                 <a id="search" class="waves-effect waves-light red darken-4 btn-small">Search</a>
+                                <h6 class="rainbow-text" id="texterror">Please enter in a game to search by</h6>
                             </div>
                             <hr>
                             <h5 style="text-align: center; color: rgb(64, 62, 62); margin-top: 2rem;">Find a Random Video Game</h5>
                             <div class="row">
                                 <div class="input-field col s7">
                                     <select multiple id="genre">
-                                        <option value="" disabled selected>Pick A Genre</option>
+                                        <option value="" disabled>Pick A Genre</option>
                                         <option value="31">Adventure</option>
                                         <option value="33">Arcade</option>
                                         <option value="4">Fighting</option>
@@ -85,6 +86,7 @@
                                 </div>
                             </div>
                             <a id="findagame" class="waves-effect waves-light red darken-4 btn-small pulse">FIND A GAME</a>
+                            <h6 class="rainbow-text" id="pickerror">Please select all options before submitting</h6>
                         </div>
                     </div>
                 </div>
@@ -95,10 +97,13 @@
         <div class="indeterminate"></div>
     </div>
     <div class="container hide" style="justify-content: center;" id="results-container">
-        <div class="card-panel white" id="card-panel">
+        <div class="card-panel transparent" id="card-panel">
             <h4 style="text-align: center;" id="search-results-header">Search Results</h4>
+
             <input type="text" class="inputValue" placeholder="Enter your address to see where you can buy">
             <input type="submit" class="button" value="Submit">
+            <br>
+
         </div>
     </div>
 
