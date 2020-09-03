@@ -463,39 +463,5 @@ $('#search').click(function () {
         console.error(err);
       });
       
-    });
-    let address = $('.inputValue').val();
-    let queryurl1 = "https://trueway-geocoding.p.rapidapi.com/Geocode?language=en&country=US&address=" + address
-$('.button').on('click', function (){
+    }});
 
-//   $.ajax({
-// })
-//     "async": true,
-// 	"crossDomain": true,
-//     url: "https://trueway-geocoding.p.rapidapi.com/Geocode?language=en&country=US&address=" + address,
-//     method: "GET",
-//     "headers": {
-//       "x-rapidapi-host": "trueway-geocoding.p.rapidapi.com",
-//       "x-rapidapi-key": "bc84f22ab9mshbb7fd1f1537ed72p1a08d7jsn347f76f5f7c5"
-//     } 
-// }).then(function(response){
-// console.log(response)
-
-// });
-// })
-   
-var settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": queryurl1,
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "trueway-geocoding.p.rapidapi.com",
-		"x-rapidapi-key": "bc84f22ab9mshbb7fd1f1537ed72p1a08d7jsn347f76f5f7c5"
-	}
-}
-
-$.ajax(settings).done(function (response) {
-	console.log(response);
-});
-})
