@@ -465,3 +465,19 @@ $('#search').click(function () {
       
     }});
 
+$('#search').on('click', function(){
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/9266/information?amount=100&unit=gram",
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+      "x-rapidapi-key": "93a850cf5fmsh9786891d2e2471fp1069fdjsnb7305163276b"
+    }
+  }
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+})
