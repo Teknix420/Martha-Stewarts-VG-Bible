@@ -300,7 +300,20 @@ $('#findagame').click(function () {
     }).catch(err => {
       console.error(err);
     });
-
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://tasty.p.rapidapi.com/recipes/list?tags=under_30_minutes&from=0&sizes=20",
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "tasty.p.rapidapi.com",
+        "x-rapidapi-key": "93a850cf5fmsh9786891d2e2471fp1069fdjsnb7305163276b"
+      }
+    }
+    
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
   };
 
 });
@@ -462,22 +475,69 @@ $('#search').click(function () {
       .catch(err => {
         console.error(err);
       });
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://tasty.p.rapidapi.com/recipes/list?tags=under_30_minutes&from=0&sizes=50",
+        "method": "GET",
+        "headers": {
+          "x-rapidapi-host": "tasty.p.rapidapi.com",
+          "x-rapidapi-key": "93a850cf5fmsh9786891d2e2471fp1069fdjsnb7305163276b"
+        }
+      }
       
+      $.ajax(settings).done(function (response) {
+        console.log(response.results[3])
+        console.log(response.results[3].name);
+        console.log(response.results[3].description);
+        console.log(response.results[3].thumbnail_url);
+        console.log(response.results[3].total_time_minutes);
+        console.log(response.results[3].name);
+        let instructionsArray = [];
+        let componentsArray = [];
+        if (response.results[3].instructions != undefined) {
+          for (let m = 0; m < response.results[3].instructions.length; m++) {
+            let instructions =  response.results[3].instructions[m].display_text;
+            instructionsArray.push(' ' + instructions);
+          };
+        }
+        //  else {
+        // };
+        
+        console.log(instructionsArray);
+        if (response.results[3].sections[0].components != undefined) {
+          for (let n = 0; n < response.results[3].sections[0].components.length; n++) {
+            let components = response.results[3].sections[0].components[n].raw_text;
+            componentsArray.push(' ' + components);
+          };
+        } 
+        // else {
+        // };
+        
+        // console.log(response.results[3].sections[0].components[0].raw_text)
+        console.log(componentsArray);
+      });
+    
+    
     }});
 
-$('#search').on('click', function(){
-  var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/9266/information?amount=100&unit=gram",
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-      "x-rapidapi-key": "93a850cf5fmsh9786891d2e2471fp1069fdjsnb7305163276b"
-    }
-  }
+
+    // let randomFood = response.data[Math.floor(Math.random() * response.data.length)];
+    //       const removeArray = response.data.indexOf(randomFood);
+
+// $('#search').on('click', function(){
+//   var settings = {
+//     "async": true,
+//     "crossDomain": true,
+//     "url": "https://tasty.p.rapidapi.com/recipes/list?tags=under_30_minutes&from=0&sizes=20",
+//     "method": "GET",
+//     "headers": {
+//       "x-rapidapi-host": "tasty.p.rapidapi.com",
+//       "x-rapidapi-key": "93a850cf5fmsh9786891d2e2471fp1069fdjsnb7305163276b"
+//     }
+//   }
   
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-  });
-})
+//   $.ajax(settings).done(function (response) {
+//     console.log(response);
+//   });
+// })
