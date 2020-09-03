@@ -77,7 +77,7 @@ $('#findagame').click(function () {
 
         $('#search-results-header').text('You might like...');
         $('#loading-bar').attr('class', 'hide');
-
+        $('#food-results-container').attr('class', 'container')
         for (let i = 0; i < resultSelection; i++) {
 
           let randomPick = response.data[Math.floor(Math.random() * response.data.length)];
@@ -190,7 +190,7 @@ $('#findagame').click(function () {
 
         $('#search-results-header').text('Random Games');
         $('#loading-bar').attr('class', 'hide');
-
+       
         for (let i = 0; i < response.data.length; i++) {
 
           let pageBreak = $('<br>');
@@ -300,10 +300,11 @@ $('#findagame').click(function () {
     }).catch(err => {
       console.error(err);
     });
+
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://tasty.p.rapidapi.com/recipes/list?tags=under_30_minutes&from=0&sizes=20",
+      "url": "https://tasty.p.rapidapi.com/recipes/list?tags=under_30_minutes&from=0&sizes=50",
       "method": "GET",
       "headers": {
         "x-rapidapi-host": "tasty.p.rapidapi.com",
@@ -312,11 +313,58 @@ $('#findagame').click(function () {
     }
     
     $.ajax(settings).done(function (response) {
-      console.log(response);
-    });
-  };
+      console.log(response.results[3])
+      console.log(response.results[3].name);
+      console.log(response.results[3].description);
+      console.log(response.results[3].thumbnail_url);
+      console.log(response.results[3].total_time_minutes);
+      // console.log(response.results[3].name);
+      let instructionsArray = [];
+      let componentsArray = [];
+      let foodNameHElement = $('<h5>')
+      let foodDescriptionPEl = $('<p>')
+      let foodImgEl = $('<img height = "50%", width = "50%">')
+      let foodTimeEl = $('<p>')
+      let foodIngredientsEl = $('<p>')
+      let foodInstructionsEl =$('<p>')
+      let foodName = response.results[3].name;
+      let foodDescription = response.results[3].description;
+      let foodTime = response.results[3].total_time_minutes;
+      if (response.results[3].instructions != undefined) {
+        for (let m = 0; m < response.results[3].instructions.length; m++) {
+          let instructions =  response.results[3].instructions[m].display_text;
+          instructionsArray.push(' ' + instructions);
+        };
+      }
+      //  else {
+      // };
+      
+      console.log(instructionsArray);
 
-});
+      
+      if (response.results[3].sections[0].components != undefined) {
+        for (let n = 0; n < response.results[3].sections[0].components.length; n++) {
+          let components = response.results[3].sections[0].components[n].raw_text;
+          componentsArray.push(' ' + components);
+        };
+      } 
+      // else {
+      // };
+      
+      // console.log(response.results[3].sections[0].components[0].raw_text)
+      console.log(componentsArray);
+
+      foodNameHElement.text(foodName)
+      foodDescriptionPEl.text('Description: ' + foodDescription)
+      foodImgEl.attr('src', response.results[3].thumbnail_url)
+      foodImgEl.attr('class', 'foodImg')
+      foodTimeEl.text('Average time to make: ' + foodTime)
+      foodIngredientsEl.text('Ingredients: ' + componentsArray)
+      foodInstructionsEl.text('Instructions: ' + instructionsArray)
+      $('#food-card-panel').append(foodImgEl, foodNameHElement, foodDescriptionPEl, foodImgEl, foodIngredientsEl, foodInstructionsEl)
+    });
+  }
+  });
 
 $('#search').click(function () {
 
