@@ -313,56 +313,62 @@ $('#findagame').click(function () {
     }
     
     $.ajax(settings).done(function (response) {
-      console.log(response.results[3])
-      console.log(response.results[3].name);
-      console.log(response.results[3].description);
-      console.log(response.results[3].thumbnail_url);
-      console.log(response.results[3].total_time_minutes);
-      // console.log(response.results[3].name);
-      let instructionsArray = [];
-      let componentsArray = [];
-      let foodNameHElement = $('<h5>')
-      let foodDescriptionPEl = $('<p>')
-      let foodImgEl = $('<img height = "50%", width = "50%">')
-      let foodTimeEl = $('<p>')
-      let foodIngredientsEl = $('<p>')
-      let foodInstructionsEl =$('<p>')
-      let foodName = response.results[3].name;
-      let foodDescription = response.results[3].description;
-      let foodTime = response.results[3].total_time_minutes;
-      if (response.results[3].instructions != undefined) {
-        for (let m = 0; m < response.results[3].instructions.length; m++) {
-          let instructions =  response.results[3].instructions[m].display_text;
-          instructionsArray.push(' ' + instructions);
+      let randomFoodPick = response.results[Math.floor(Math.random() * response.results.length)];
+        const removeFoodArray = response.results.indexOf(randomFoodPick)
+        if (removeFoodArray > -1) {
+          response.results.splice(removeFoodArray, 1);
         };
-      }
-      //  else {
-      // };
-      
-      console.log(instructionsArray);
+        console.log(response)
+        console.log(response.results[removeFoodArray])
+        console.log(response.results[removeFoodArray].name);
+        console.log(response.results[removeFoodArray].description);
+        console.log(response.results[removeFoodArray].thumbnail_url);
+        console.log(response.results[removeFoodArray].total_time_minutes);
+        // console.log(response.results[removeFoodArray].name);
+        let instructionsArray = [];
+        let componentsArray = [];
+        let foodNameHElement = $('<h5>')
+        let foodDescriptionPEl = $('<p>')
+        let foodImgEl = $('<img height = "50%", width = "50%">')
+        let foodTimeEl = $('<p>')
+        let foodIngredientsEl = $('<p>')
+        let foodInstructionsEl =$('<p>')
+        let foodName = response.results[removeFoodArray].name;
+        let foodDescription = response.results[removeFoodArray].description;
+        let foodTime = response.results[removeFoodArray].total_time_minutes;
+        if (response.results[removeFoodArray].instructions != undefined) {
+          for (let m = 0; m < response.results[removeFoodArray].instructions.length; m++) {
+            let instructions =  response.results[removeFoodArray].instructions[m].display_text;
+            instructionsArray.push(' ' + instructions);
+          };
+        }
+        //  else {
+        // };
+        
+        console.log(instructionsArray);
 
-      
-      if (response.results[3].sections[0].components != undefined) {
-        for (let n = 0; n < response.results[3].sections[0].components.length; n++) {
-          let components = response.results[3].sections[0].components[n].raw_text;
-          componentsArray.push(' ' + components);
-        };
-      } 
-      // else {
-      // };
-      
-      // console.log(response.results[3].sections[0].components[0].raw_text)
-      console.log(componentsArray);
+        
+        if (response.results[removeFoodArray].sections[0].components != undefined) {
+          for (let n = 0; n < response.results[removeFoodArray].sections[0].components.length; n++) {
+            let components = response.results[removeFoodArray].sections[0].components[n].raw_text;
+            componentsArray.push(' ' + components);
+          };
+        } 
+        // else {
+        // };
+        
+        // console.log(response.results[removeFoodArray].sections[0].components[0].raw_text)
+        console.log(componentsArray);
 
-      foodNameHElement.text(foodName)
-      foodDescriptionPEl.text('Description: ' + foodDescription)
-      foodImgEl.attr('src', response.results[3].thumbnail_url)
-      foodImgEl.attr('class', 'foodImg')
-      foodTimeEl.text('Average time to make: ' + foodTime)
-      foodIngredientsEl.text('Ingredients: ' + componentsArray)
-      foodInstructionsEl.text('Instructions: ' + instructionsArray)
-      $('#food-card-panel').append(foodImgEl, foodNameHElement, foodDescriptionPEl, foodImgEl, foodIngredientsEl, foodInstructionsEl)
-    });
+        foodNameHElement.text(foodName)
+        foodDescriptionPEl.text('Description: ' + foodDescription)
+        foodImgEl.attr('src', response.results[removeFoodArray].thumbnail_url)
+        foodImgEl.attr('class', 'foodImg')
+        foodTimeEl.text('Average time to make: ' + foodTime)
+        foodIngredientsEl.text('Ingredients: ' + componentsArray)
+        foodInstructionsEl.text('Instructions: ' + instructionsArray)
+        $('#food-card-panel').append(foodImgEl, foodNameHElement, foodDescriptionPEl, foodImgEl, foodIngredientsEl, foodInstructionsEl)
+      });
   }
   });
 
@@ -535,12 +541,18 @@ $('#search').click(function () {
       }
       
       $.ajax(settings).done(function (response) {
-        console.log(response.results[3])
-        console.log(response.results[3].name);
-        console.log(response.results[3].description);
-        console.log(response.results[3].thumbnail_url);
-        console.log(response.results[3].total_time_minutes);
-        // console.log(response.results[3].name);
+        let randomFoodPick = response.results[Math.floor(Math.random() * response.results.length)];
+        const removeFoodArray = response.results.indexOf(randomFoodPick)
+        if (removeFoodArray > -1) {
+          response.results.splice(removeFoodArray, 1);
+        };
+        console.log(response)
+        console.log(response.results[removeFoodArray])
+        console.log(response.results[removeFoodArray].name);
+        console.log(response.results[removeFoodArray].description);
+        console.log(response.results[removeFoodArray].thumbnail_url);
+        console.log(response.results[removeFoodArray].total_time_minutes);
+        // console.log(response.results[removeFoodArray].name);
         let instructionsArray = [];
         let componentsArray = [];
         let foodNameHElement = $('<h5>')
@@ -549,12 +561,12 @@ $('#search').click(function () {
         let foodTimeEl = $('<p>')
         let foodIngredientsEl = $('<p>')
         let foodInstructionsEl =$('<p>')
-        let foodName = response.results[3].name;
-        let foodDescription = response.results[3].description;
-        let foodTime = response.results[3].total_time_minutes;
-        if (response.results[3].instructions != undefined) {
-          for (let m = 0; m < response.results[3].instructions.length; m++) {
-            let instructions =  response.results[3].instructions[m].display_text;
+        let foodName = response.results[removeFoodArray].name;
+        let foodDescription = response.results[removeFoodArray].description;
+        let foodTime = response.results[removeFoodArray].total_time_minutes;
+        if (response.results[removeFoodArray].instructions != undefined) {
+          for (let m = 0; m < response.results[removeFoodArray].instructions.length; m++) {
+            let instructions =  response.results[removeFoodArray].instructions[m].display_text;
             instructionsArray.push(' ' + instructions);
           };
         }
@@ -564,28 +576,28 @@ $('#search').click(function () {
         console.log(instructionsArray);
 
         
-        if (response.results[3].sections[0].components != undefined) {
-          for (let n = 0; n < response.results[3].sections[0].components.length; n++) {
-            let components = response.results[3].sections[0].components[n].raw_text;
+        if (response.results[removeFoodArray].sections[0].components != undefined) {
+          for (let n = 0; n < response.results[removeFoodArray].sections[0].components.length; n++) {
+            let components = response.results[removeFoodArray].sections[0].components[n].raw_text;
             componentsArray.push(' ' + components);
           };
         } 
         // else {
         // };
         
-        // console.log(response.results[3].sections[0].components[0].raw_text)
+        // console.log(response.results[removeFoodArray].sections[0].components[0].raw_text)
         console.log(componentsArray);
 
         foodNameHElement.text(foodName)
         foodDescriptionPEl.text('Description: ' + foodDescription)
-        foodImgEl.attr('src', response.results[3].thumbnail_url)
+        foodImgEl.attr('src', response.results[removeFoodArray].thumbnail_url)
         foodImgEl.attr('class', 'foodImg')
         foodTimeEl.text('Average time to make: ' + foodTime)
         foodIngredientsEl.text('Ingredients: ' + componentsArray)
         foodInstructionsEl.text('Instructions: ' + instructionsArray)
         $('#food-card-panel').append(foodImgEl, foodNameHElement, foodDescriptionPEl, foodImgEl, foodIngredientsEl, foodInstructionsEl)
       });
-    
+      
     
     }});
 
