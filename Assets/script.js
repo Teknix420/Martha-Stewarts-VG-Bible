@@ -361,7 +361,7 @@ $('#search').click(function () {
 
         $('#search-results-header').text('Searched Game')
         $('#loading-bar').attr('class', 'hide')
-
+        $('#food-results-container').attr('class', 'container')
         for (var i = 0; i < response.data.length; i++) {
 
           let pageBreak = $('<br>');
@@ -492,9 +492,18 @@ $('#search').click(function () {
         console.log(response.results[3].description);
         console.log(response.results[3].thumbnail_url);
         console.log(response.results[3].total_time_minutes);
-        console.log(response.results[3].name);
+        // console.log(response.results[3].name);
         let instructionsArray = [];
         let componentsArray = [];
+        let foodNameHElement = $('<h5>')
+        let foodDescriptionPEl = $('<p>')
+        let foodImgEl = $('<img height = "50%", width = "50%">')
+        let foodTimeEl = $('<p>')
+        let foodIngredientsEl = $('<p>')
+        let foodInstructionsEl =$('<p>')
+        let foodName = response.results[3].name;
+        let foodDescription = response.results[3].description;
+        let foodTime = response.results[3].total_time_minutes;
         if (response.results[3].instructions != undefined) {
           for (let m = 0; m < response.results[3].instructions.length; m++) {
             let instructions =  response.results[3].instructions[m].display_text;
@@ -505,6 +514,8 @@ $('#search').click(function () {
         // };
         
         console.log(instructionsArray);
+
+        
         if (response.results[3].sections[0].components != undefined) {
           for (let n = 0; n < response.results[3].sections[0].components.length; n++) {
             let components = response.results[3].sections[0].components[n].raw_text;
@@ -516,6 +527,15 @@ $('#search').click(function () {
         
         // console.log(response.results[3].sections[0].components[0].raw_text)
         console.log(componentsArray);
+
+        foodNameHElement.text(foodName)
+        foodDescriptionPEl.text('Description: ' + foodDescription)
+        foodImgEl.attr('src', response.results[3].thumbnail_url)
+        foodImgEl.attr('class', 'foodImg')
+        foodTimeEl.text('Average time to make: ' + foodTime)
+        foodIngredientsEl.text('Ingredients: ' + componentsArray)
+        foodInstructionsEl.text('Instructions: ' + instructionsArray)
+        $('#food-card-panel').append(foodImgEl, foodNameHElement, foodDescriptionPEl, foodImgEl, foodIngredientsEl, foodInstructionsEl)
       });
     
     

@@ -209,3 +209,8 @@ a:hover {
     animation: rainbow-text 1s infinite;
   }
   
+.foodImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
