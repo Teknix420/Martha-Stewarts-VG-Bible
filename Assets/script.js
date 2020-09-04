@@ -1,31 +1,31 @@
-
+// document.ready function that runs form select
 $(document).ready(function () {
   $('select').formSelect();
 });
-
+// keypress functions that run a click listener in lieu of subitting
 $('#gamename').keypress(function (event) {
   if (event.keyCode === 13) {
     $('#search').click();
   }
 });
-
+// keypress functions that run a click listener in lieu of subitting
 $('#gamenumber').keypress(function (event) {
   if (event.keyCode === 13) {
     $('#findagame').click();
   }
 });
-
+// hides pick and text errors
 $('#pickerror').hide();
 $('#texterror').hide();
-
+// click listener for random game button
 $('#findagame').click(function () {
-
+// assigning  static variables to Jquery calls
   let genreArray = $('#genre').val();
   let genreSelection;
   let platformSelection = $('#platform').val();
   let perspectiveSelection = $('#perspective').val();
   let resultSelection = $('#gamenumber').val();
-
+//  if the length of the genre array is 0, platform is null, perspective selection is null, or the result selection is null, return an error message
   if (genreArray.length == 0 || platformSelection === null || perspectiveSelection === null || resultSelection === '') {
 
     $('#pickerror').show();
@@ -34,15 +34,15 @@ $('#findagame').click(function () {
     }, 5000);
 
   } else {
-
+    // attributes to be displayed while the data is being pulled
     genreSelection = genreArray.toString();
     $('#search-results-header').text('Finding you a random game...');
     $('#loading-bar').attr('class', 'progress');
     $('#results-container').attr('class', '');
     $('#main-container').attr('class', 'hide');
-
+    // axios call to IGDB
     axios({
-
+    
       url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
       method: 'POST',
       headers: {
@@ -52,28 +52,29 @@ $('#findagame').click(function () {
       },
 
       data: 'where genres = [' + genreSelection + '] & platforms = (' + platformSelection + ') & player_perspectives = (' + perspectiveSelection + '); fields name, release_dates.human, genres.name, cover.url, similar_games.name, time_to_beat.normally, summary, age_ratings.rating, platforms.name; limit 500;',
-
+      // then promise
     }).then(response => {
-
+      // if there is no data, user will be shown error message
       if (response.data.length === 0) {
 
         $('#search-results-header').text('No Search Results! Please Try Again!');
         $('#loading-bar').attr('class', 'hide');
 
       } else if (resultSelection < response.data.length) {
-
+        // setting attributes to be shown in html
         $('#search-results-header').text('You might like...');
         $('#loading-bar').attr('class', 'hide');
         $('#food-results-container').attr('class', 'container')
+        // loop that grabs data from the results
         for (let i = 0; i < resultSelection; i++) {
-
+          // assigns random number to be put into the index of the data array
           let randomPick = response.data[Math.floor(Math.random() * response.data.length)];
           const removeArray = response.data.indexOf(randomPick);
 
           if (removeArray > -1) {
             response.data.splice(removeArray, 1);
           };
-
+          // setting variables to be displayed in html
           let pageBreak = $('<br>');
           let pageBreak2 = $('<br>');
           let pageBreak3 = $('<br>');
@@ -99,14 +100,14 @@ $('#findagame').click(function () {
           var ratingArray = [];
           let similarGamesContent = $('<p>');
           let similarGamesArray = [];
-
+          // as long as similar games are not undefined, loop will run grabbing similar games data
           if (randomPick.similar_games != undefined) {
             for (let l = 0; l < randomPick.similar_games.length; l++) {
               let similarGames = randomPick.similar_games[l].name
               similarGamesArray.push(' ' + similarGames)
             }
           }
-
+          //  as long as age rating is not undefined, loop will run grabbing age ratings, comparing their values from IGDB with our values, and displaying the according letter or age rating
           if (randomPick.age_ratings != undefined) {
 
             for (let k = 0; k < randomPick.age_ratings.length; k++) {
@@ -142,7 +143,7 @@ $('#findagame').click(function () {
             };
 
           };
-
+          // as long as the platforms are not undefined, loop will run grabbing the all available platforms for the game
           if (randomPick.platforms != undefined) {
 
             for (let j = 0; j < randomPick.platforms.length; j++) {
@@ -153,18 +154,18 @@ $('#findagame').click(function () {
             };
 
           };
-
+          // variables being created to be displayed in the html
           ageRating.text('ESRB/PEGI Rating: ' + ratingArray.toString());
           availableConsoles.text('Available Consoles: ' + consoleArray.toString());
           similarGamesContent.text('Similar Games: ' + similarGamesArray.toString() + ' ');
           gameSummary.text(randomPick.summary);
-
+          // if the cover information is not undefined, image source will be set to the cover url for the game
           if (randomPick.cover != undefined) {
 
             searchImg.attr('src', 'https://' + randomPick.cover.url.replace('t_thumb', 't_cover_big'));
 
           };
-
+          // appeneding data retrieved to the html
           imgDiv.append(searchImg);
           textContentDiv.append(gameTitle, gameGenre, pageBreak2, gameSummary, pageBreak3, availableConsoles, pageBreak4, ageRating, pageBreak, similarGamesContent);
           textDiv.append(textContentDiv);
@@ -177,7 +178,7 @@ $('#findagame').click(function () {
 
         $('#search-results-header').text('Random Games');
         $('#loading-bar').attr('class', 'hide');
-       
+      // same code running as above
         for (let i = 0; i < response.data.length; i++) {
 
           let pageBreak = $('<br>');
@@ -283,7 +284,7 @@ $('#findagame').click(function () {
         };
 
       };
-
+      // error to be displayed in console if it exists
     }).catch(err => {
       console.error(err);
     });
