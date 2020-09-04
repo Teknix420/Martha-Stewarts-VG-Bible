@@ -74,10 +74,6 @@ $('#findagame').click(function () {
             response.data.splice(removeArray, 1);
           };
 
-          let pageBreak = $('<br>');
-          let pageBreak2 = $('<br>');
-          let pageBreak3 = $('<br>');
-          let pageBreak4 = $('<br>');
           let gameTitle = $('<h5>');
           gameTitle.attr('class', 'header');
           let gameGenre = $('<p>');
@@ -180,10 +176,6 @@ $('#findagame').click(function () {
        
         for (let i = 0; i < response.data.length; i++) {
 
-          let pageBreak = $('<br>');
-          let pageBreak2 = $('<br>');
-          let pageBreak3 = $('<br>');
-          let pageBreak4 = $('<br>');
           let gameTitle = $('<h5>');
           gameTitle.attr('class', 'header');
           let gameGenre = $('<p>');
