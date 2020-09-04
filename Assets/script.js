@@ -74,6 +74,10 @@ $('#findagame').click(function () {
             response.data.splice(removeArray, 1);
           };
 
+          let pageBreak = $('<br>');
+          let pageBreak2 = $('<br>');
+          let pageBreak3 = $('<br>');
+          let pageBreak4 = $('<br>');
           let gameTitle = $('<h5>');
           gameTitle.attr('class', 'header');
           let gameGenre = $('<p>');
@@ -176,6 +180,10 @@ $('#findagame').click(function () {
        
         for (let i = 0; i < response.data.length; i++) {
 
+          let pageBreak = $('<br>');
+          let pageBreak2 = $('<br>');
+          let pageBreak3 = $('<br>');
+          let pageBreak4 = $('<br>');
           let gameTitle = $('<h5>');
           gameTitle.attr('class', 'header');
           let gameGenre = $('<p>');
@@ -338,9 +346,9 @@ $('#findagame').click(function () {
   });
 
 $('#search').click(function () {
-// pulls value of the name that is entered in the search bar
+
   let gameName = $('#gamename').val();
-  // displays a message to the user if they do not enter a value
+  
   if (gameName === '') {
     
     $('#texterror').show();
@@ -349,12 +357,12 @@ $('#search').click(function () {
     }, 5000);
     
   } else {
-    // adding text and attributes to certain elements of the HTML if the user enters a game title
+    
     $('#search-results-header').text('Searching for your game...');
     $('#loading-bar').attr('class', 'progress');
     $('#results-container').attr('class', '');
     $('#main-container').attr('class', 'hide');
-  // axios call to IGDB
+  
     axios({
 
     url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
@@ -368,21 +376,25 @@ $('#search').click(function () {
     data: 'search "' + gameName + '"; fields name, release_dates.human, genres.name, cover.url, similar_games.name, time_to_beat.normally, summary, age_ratings.rating, platforms.name; limit 50;',
 
   })
-// then promise
+
     .then(response => {
-// if no results are found, the user will be given this message
+
       if (response.data.length === 0) {
 
         $('#search-results-header').text('No Search Results! Please Try Again!');
         $('#loading-bar').attr('class', 'hide');
-// code to be run if results are found
+
       } else {
 
         $('#search-results-header').text('Searched Game')
         $('#loading-bar').attr('class', 'hide')
         $('#food-results-container').attr('class', 'container')
         for (var i = 0; i < response.data.length; i++) {
-// setting JQuery calls to create HTML elements in the HTML
+
+          let pageBreak = $('<br>');
+          let pageBreak2 = $('<br>');
+          let pageBreak3 = $('<br>');
+          let pageBreak4 = $('<br>');
           let gameTitle = $('<h5>');
           gameTitle.attr('class', 'header');
           let gameGenre = $('<p>');
@@ -403,7 +415,7 @@ $('#search').click(function () {
           let ratingArray = [];
           let similarGamesContent = $('<p>');
           let similarGamesArray = [];
-// if the similar games are not undefined, a loop will run that will give the user similar games to the one that they search for
+
           if (response.data[i].similar_games != undefined) {
 
             for (let l = 0; l < response.data[i].similar_games.length; l++) {
@@ -414,7 +426,7 @@ $('#search').click(function () {
             };
 
           };
-// if the age ratings section is not undefined, code will be run that will identify what value the rating is and assign it an appropriate letter or age rating
+
           if (response.data[i].age_ratings != undefined) {
 
             for (let k = 0; k < response.data[i].age_ratings.length; k++) {
@@ -450,7 +462,7 @@ $('#search').click(function () {
             };
 
           };
-// if the platform data is defined, a loop is run to create an array of which console the games are available on
+
           if (response.data[i].platforms != undefined) {
 
             for (let j = 0; j < response.data[i].platforms.length; j++) {
@@ -461,12 +473,12 @@ $('#search').click(function () {
             };
 
           };
-// assigning values to the ageRating variables to be displayed in the HTML
+
           ageRating.text('ESRB/PEGI Rating: ' + ratingArray.toString());
           availableConsoles.text('Available Consoles: ' + consoleArray.toString());
           similarGamesContent.text('Similar Games: ' + similarGamesArray.toString() + ' ');
           gameSummary.text(response.data[i].summary);
-// if the cover image is not undefined, the image will data will be assigned to the source value of the image
+
           if (response.data[i].cover != undefined) {
 
             var imgCover = response.data[i].cover.url;
@@ -475,7 +487,7 @@ $('#search').click(function () {
             searchImg.attr('src', 'https://' + imgNew);
 
           };
-// appends the data retireved to the html
+
           imgDiv.append(searchImg);
           textContentDiv.append(gameTitle, gameGenre, pageBreak2, gameSummary, pageBreak3, availableConsoles, pageBreak4, ageRating, pageBreak, similarGamesContent);
           textDiv.append(textContentDiv);
@@ -490,7 +502,6 @@ $('#search').click(function () {
       .catch(err => {
         console.error(err);
       });
-      // object set to run an ajax call to grab info from Tasty api
       var settings = {
         "async": true,
         "crossDomain": true,
@@ -501,17 +512,13 @@ $('#search').click(function () {
           "x-rapidapi-key": "93a850cf5fmsh9786891d2e2471fp1069fdjsnb7305163276b"
         }
       }
-      // ajax call on click
+      
       $.ajax(settings).done(function (response) {
-        // creates a random number depending on how long the array of the results is
         let randomFoodPick = response.results[Math.floor(Math.random() * response.results.length)];
-        // sets a constant variable to be assigned to the index of the random number created
         const removeFoodArray = response.results.indexOf(randomFoodPick)
-        // if the array is created, results are spliced into the removeFoodArray
         if (removeFoodArray > -1) {
           response.results.splice(removeFoodArray, 1);
         };
-        // creating variables to be used in the html
         let instructionsArray = [];
         let componentsArray = [];
         let foodNameHElement = $('<h5>')
@@ -520,25 +527,22 @@ $('#search').click(function () {
         let foodTimeEl = $('<p>')
         let foodIngredientsEl = $('<p>')
         let foodInstructionsEl =$('<p>')
-        // grabbing info from the ajax call and assigning to the proper variables
         let foodName = response.results[removeFoodArray].name;
         let foodDescription = response.results[removeFoodArray].description;
         let foodTime = response.results[removeFoodArray].total_time_minutes;
-        // as long as the instructions are not undefined, a loop will run that grabs the instructions in the correct order
         if (response.results[removeFoodArray].instructions != undefined) {
           for (let m = 0; m < response.results[removeFoodArray].instructions.length; m++) {
             let instructions =  response.results[removeFoodArray].instructions[m].display_text;
             instructionsArray.push(' ' + instructions);
           };
         }
-// as long as the components are not undefined, will run a loop that grabs the foods ingredients
+
         if (response.results[removeFoodArray].sections[0].components != undefined) {
           for (let n = 0; n < response.results[removeFoodArray].sections[0].components.length; n++) {
             let components = response.results[removeFoodArray].sections[0].components[n].raw_text;
             componentsArray.push(' ' + components);
           };
-        };
-        //  creating text and attributes to be appended in the HTML
+        } 
         foodNameHElement.text(foodName)
         foodDescriptionPEl.text('Description: ' + foodDescription)
         foodImgEl.attr('src', response.results[removeFoodArray].thumbnail_url)
