@@ -287,7 +287,7 @@ $('#findagame').click(function () {
     }).catch(err => {
       console.error(err);
     });
-
+//  food API
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -298,7 +298,7 @@ $('#findagame').click(function () {
         "x-rapidapi-key": "93a850cf5fmsh9786891d2e2471fp1069fdjsnb7305163276b"
       }
     }
-    
+    // food API call //getting info and creating different elements for the page
     $.ajax(settings).done(function (response) {
       let randomFoodPick = response.results[Math.floor(Math.random() * response.results.length)];
         const removeFoodArray = response.results.indexOf(randomFoodPick)
@@ -332,7 +332,7 @@ $('#findagame').click(function () {
           };
         } 
 
-
+// assigning info from api call to the correct elements
         foodNameHElement.text(foodName)
         foodDescriptionPEl.text('Description: ' + foodDescription)
         foodImgEl.attr('src', response.results[removeFoodArray].thumbnail_url)
@@ -502,6 +502,7 @@ $('#search').click(function () {
       .catch(err => {
         console.error(err);
       });
+      // food API to make it work on both buttons
       var settings = {
         "async": true,
         "crossDomain": true,
