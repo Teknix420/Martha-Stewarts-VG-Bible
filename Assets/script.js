@@ -346,9 +346,9 @@ $('#findagame').click(function () {
   });
 
 $('#search').click(function () {
-
+// grabs user text input from search
   let gameName = $('#gamename').val();
-  
+  // if no text is submitted then the user will be shown an error
   if (gameName === '') {
     
     $('#texterror').show();
@@ -357,12 +357,12 @@ $('#search').click(function () {
     }, 5000);
     
   } else {
-    
+    //  creating elements to be shown while the data is being retrieved from IGDB api
     $('#search-results-header').text('Searching for your game...');
     $('#loading-bar').attr('class', 'progress');
     $('#results-container').attr('class', '');
     $('#main-container').attr('class', 'hide');
-  
+  // axios call to IGDB api
     axios({
 
     url: "https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/games",
@@ -376,21 +376,21 @@ $('#search').click(function () {
     data: 'search "' + gameName + '"; fields name, release_dates.human, genres.name, cover.url, similar_games.name, time_to_beat.normally, summary, age_ratings.rating, platforms.name; limit 50;',
 
   })
-
+// then promise
     .then(response => {
-
+      // if no information can be retrieved, a message is displayed to the user
       if (response.data.length === 0) {
 
         $('#search-results-header').text('No Search Results! Please Try Again!');
         $('#loading-bar').attr('class', 'hide');
 
       } else {
-
+        // creating elements to be shown in html
         $('#search-results-header').text('Searched Game')
         $('#loading-bar').attr('class', 'hide')
         $('#food-results-container').attr('class', 'container')
         for (var i = 0; i < response.data.length; i++) {
-
+          // creating global variables to be inserted in HTML with Jquery
           let pageBreak = $('<br>');
           let pageBreak2 = $('<br>');
           let pageBreak3 = $('<br>');
@@ -415,7 +415,7 @@ $('#search').click(function () {
           let ratingArray = [];
           let similarGamesContent = $('<p>');
           let similarGamesArray = [];
-
+          // as long as the similar games are not undefined, loop will run that grabs similar game data
           if (response.data[i].similar_games != undefined) {
 
             for (let l = 0; l < response.data[i].similar_games.length; l++) {
@@ -426,7 +426,7 @@ $('#search').click(function () {
             };
 
           };
-
+          // as long as the age ratings are not undefined, loop will run grabbing the age rating data and assign it a text or number value depending on the value IGDB has given it
           if (response.data[i].age_ratings != undefined) {
 
             for (let k = 0; k < response.data[i].age_ratings.length; k++) {
@@ -462,7 +462,7 @@ $('#search').click(function () {
             };
 
           };
-
+          // if the platforms are not undefined, loop will run grabbing platform data
           if (response.data[i].platforms != undefined) {
 
             for (let j = 0; j < response.data[i].platforms.length; j++) {
@@ -473,12 +473,12 @@ $('#search').click(function () {
             };
 
           };
-
+          // converts arrays to strings
           ageRating.text('ESRB/PEGI Rating: ' + ratingArray.toString());
           availableConsoles.text('Available Consoles: ' + consoleArray.toString());
           similarGamesContent.text('Similar Games: ' + similarGamesArray.toString() + ' ');
           gameSummary.text(response.data[i].summary);
-
+          // as long as the cover img source is not undefined, cover image data will be pulled and set as the src attribute of the image
           if (response.data[i].cover != undefined) {
 
             var imgCover = response.data[i].cover.url;
@@ -487,7 +487,7 @@ $('#search').click(function () {
             searchImg.attr('src', 'https://' + imgNew);
 
           };
-
+          // appends all data grabbed from the api to the html
           imgDiv.append(searchImg);
           textContentDiv.append(gameTitle, gameGenre, pageBreak2, gameSummary, pageBreak3, availableConsoles, pageBreak4, ageRating, pageBreak, similarGamesContent);
           textDiv.append(textContentDiv);
