@@ -26,6 +26,6 @@ The user will also be given a random recipe from Tasty's API as well.
 
 ## Credits
 
-This website was created by Travis Gray, Maximillian Daniels, Benjamin Ivey, and Evan Mackay.
+This website was created by Travis Gray, Maximillian Daniel, Benjamin Ivey, and Evan Mackay.
 
 This website uses IGDB's and Tasty's API. 
