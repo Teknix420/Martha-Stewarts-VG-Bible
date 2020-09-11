@@ -1,5 +1,7 @@
 # Martha Stewarts Video Game Bible
 
+https://teknix420.github.io/Martha-Stewarts-VG-Bible/index.html
+
 This is a web based application made using HTML 5, Materialize, and Javascript/jQuery. The website uses the IGDB and Tasty API's to find information on searched/random video game titles and will pair the results up with a random food recipe for the user to try.
 
 ![martha-stewarts-vg-bible-home-page](https://github.com/Teknix420/Martha-Stewarts-VG-Bible/blob/master/Assets/Screen%20Shot%202020-09-07%20at%207.48.19%20PM.png?raw=true)
